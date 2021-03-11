@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Cult",
+  "version": "1.0",
+  "description": "Adds notes to highlighted text on pages",
+  "content_scripts": [
+    {
+      "matches": ["https://www.nairaland.com/*"],
+      "js": ["content.js", "utils.js", "components.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}

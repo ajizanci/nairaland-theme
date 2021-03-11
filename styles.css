@@ -1,0 +1,265 @@
+:root {
+  box-sizing: border-box;
+  --background-color: #f6f5ec;
+  --primary-color: #175616;
+  --secondary-color: #fffff0;
+  --light-gray: #f2f5f2;
+  --dark-gray: #eaecea;
+  --danger: #b10707;
+}
+
+body {
+  color: var(--primary-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/* .th-container {
+  min-height: 100vh;
+  background-color: white;
+} */
+
+.th-container * {
+  font-family: 'Roboto';
+  text-align: initial;
+  color: var(--primary-color);
+}
+
+.th-container > * {
+  padding: 2em;
+}
+
+.th-container header {
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+}
+
+header > nav {
+  margin-left: auto;
+}
+
+header > nav > ul {
+  display: flex;
+  list-style-type: none;
+}
+
+header > nav > ul > * {
+  padding: 1em;
+}
+
+header > nav > ul > * + * {
+  margin-left: 0.5em;
+}
+
+h1.logo {
+  font-size: 20px;
+}
+
+.greeting {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  margin-left: 0.5em;
+}
+
+a.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.greeting .user {
+  text-transform: uppercase;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8em 0;
+  background-color: var(--secondary-color);
+}
+
+.search {
+  overflow: hidden;
+  min-width: 40%;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.5em;
+  display: flex;
+  background-color: var(--primary-color);
+}
+
+.search > * {
+  font-size: 1rem;
+  font-family: Roboto;
+}
+
+.search > :focus {
+  outline: none;
+}
+
+.search input {
+  flex: 1;
+  display: block;
+  border: 0;
+  padding: 0.75em;
+  background-color: var(--secondary-color);
+}
+
+.search button {
+  padding: 0.75em;
+  border: 0;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.hero > * + * {
+  margin-top: 2em;
+}
+
+.logo {
+  padding: 1em;
+}
+
+.logo.big {
+  padding: 0;
+  font-size: 48px;
+}
+
+footer {
+  border: 1px solid black;
+}
+
+.ads {
+  display: grid;
+  gap: 2em;
+  grid-template-areas:
+    "ad1 ad2 ad3"
+    "how how how";
+}
+
+.ads > * {
+  border: 1px solid pink;
+  padding: 1em;
+}
+
+.ad1 {
+  grid-area: ad1;
+}
+.ad2 {
+  grid-area: ad2;
+}
+.ad3 {
+  grid-area: ad3;
+}
+.how {
+  grid-area: how;
+  background-color: var(--light-gray);
+  border: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 1.5em 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "aside threads threads threads threads";
+  gap: 2em;
+}
+
+.ads,
+.th-container main {
+  padding-left: 4em;
+  padding-right: 4em;
+}
+
+aside {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+}
+.category-nav > * + * {
+  margin-top: 2em;
+}
+.categories > * {
+  padding: 1em 2rem;
+}
+.heading {
+  font-weight: normal;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-size: 1rem;
+}
+.categories .category {
+  display: block;
+  font-size: 0.95em;
+  background-color: var(--light-gray);
+}
+.categories .category:nth-child(2n + 1) {
+  background-color: var(--dark-gray);
+}
+.threads {
+  grid-area: threads;
+}
+.threads .heading {
+  font-size: 1.3em;
+  font-weight: normal;
+  padding: 1em;
+  text-align: center;
+}
+.posts {
+  background-color: var(--secondary-color);
+}
+.posts > * {
+  padding: 1em 3em;
+  display: block;
+}
+.posts > * + * {
+  border-top: 1px solid var(--light-gray);
+}
+.pagination {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.pagination > * + * {
+  margin-left: 0.7em;
+}
+.page {
+  font-size: 0.875rem;
+}
+.page.current {
+  background-color: var(--secondary-color);
+  width: 1.5em;
+  height: 1.5em;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+  color: var(--primary-color);
+}
+.gototop {
+  padding: 1rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+}
+.disclaimer {
+  padding: 1rem;
+  font-weight: bold;
+  color: var(--danger);
+  text-align: center;
+}
