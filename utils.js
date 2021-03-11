@@ -21,7 +21,7 @@ function render(parent, tree) {
   parent.append(head);
 }
 
-const isLoggedIn =
+const isLoggedIn = () =>
   document.querySelector("table[summary] tbody tr td h1 + *").innerText !==
   "Guest";
 
@@ -44,37 +44,39 @@ const isValidHtmlTag = (tag) => {
 
 const toArray = (collection) => [].slice.call(collection);
 
-const categoryGroups = toArray(
-  document.querySelectorAll("table.boards tr td.l")
-).map((td) => {
-  const links = toArray(td.querySelectorAll("a"));
-  const heading = { title: links[0].innerText, link: links[0].href };
-  return {
-    heading,
-    categories: links
-      .slice(1)
-      .map((a) => ({ title: a.innerText, link: a.href })),
-  };
-});
+const getCategoryGroups = () =>
+  toArray(document.querySelectorAll("table.boards tr td.l")).map((td) => {
+    const links = toArray(td.querySelectorAll("a"));
+    const heading = { title: links[0].innerText, link: links[0].href };
+    return {
+      heading,
+      categories: links
+        .slice(1)
+        .map((a) => ({ title: a.innerText, link: a.href })),
+    };
+  });
 
-const threads = toArray(
-  document.querySelectorAll("table.boards tbody tr td.featured.w a")
-).map((a) => ({ title: a.innerText, link: a.href }));
+const getThreads = () =>
+  toArray(
+    document.querySelectorAll("table.boards tbody tr td.featured.w a")
+  ).map((a) => ({ title: a.innerText, link: a.href }));
 
 const removeBrackets = (str) => str.substring(1, str.length - 1);
 
-const pagesTd = document.querySelector(
-  "table.boards:nth-child(6) tbody tr:last-child td"
-);
-const pagination = [
-  {
-    page: removeBrackets(pagesTd.querySelector("b").innerText),
-    link: window.location.href,
-    current: true,
-  },
-].concat(
-  toArray(pagesTd.querySelectorAll("a")).map((a) => ({
-    page: removeBrackets(a.innerText),
-    link: a.href,
-  }))
-);
+const getPagination = () => {
+  const pagesTd = document.querySelector(
+    "table.boards:nth-child(6) tbody tr:last-child td"
+  );
+  return [
+    {
+      page: removeBrackets(pagesTd.querySelector("b").innerText),
+      link: window.location.href,
+      current: true,
+    },
+  ].concat(
+    toArray(pagesTd.querySelectorAll("a")).map((a) => ({
+      page: removeBrackets(a.innerText),
+      link: a.href,
+    }))
+  );
+};

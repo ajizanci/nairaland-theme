@@ -1,1 +1,0 @@
-console.log("Cult says hi")

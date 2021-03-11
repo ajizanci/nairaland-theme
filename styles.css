@@ -8,6 +8,10 @@
   --danger: #b10707;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
   color: var(--primary-color);
 }

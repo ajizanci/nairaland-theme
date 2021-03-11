@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.nairaland.com/*"],
-      "js": ["content.js", "utils.js", "components.js"],
+      "js": ["main.js", "utils.js", "components.js"],
       "css": ["styles.css"]
     }
   ]

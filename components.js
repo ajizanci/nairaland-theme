@@ -1,13 +1,3 @@
-(function() {
-  const preconnect = document.createElement('link');
-  const font = document.createElement("link");
-  preconnect.rel = "preconnect"
-  preconnect.href = "https://fonts.gstatic.com";
-  font.rel = "stylesheet"
-  font.href = "https://fonts.googleapis.com/css2?family=Roboto&display=swap";
-  document.querySelector("head").append(preconnect, font);
-}())
-
 const el = (tag, attrs, ...children) => [tag, attrs, children];
 
 const t = (text) => [text];
@@ -105,6 +95,6 @@ const body = document.querySelector("body");
 render(body,
   Container({},
     Header(),
-    ThreadBoard(threads, categoryGroups, pagination)
-  )
+    ThreadBoard(getThreads(), getCategoryGroups(), getPagination()),
+  ),
 );
