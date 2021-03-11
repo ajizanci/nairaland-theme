@@ -44,7 +44,15 @@ const isValidHtmlTag = (tag) => {
 
 const toArray = (collection) => [].slice.call(collection);
 
-const getCategoryGroups = () =>
+const safeQuery = (f) => {
+  try {
+    return () => f();
+  } catch {
+    return () => null;
+  }
+};
+
+const getCategoryGroups = safeQuery(() =>
   toArray(document.querySelectorAll("table.boards tr td.l")).map((td) => {
     const links = toArray(td.querySelectorAll("a"));
     const heading = { title: links[0].innerText, link: links[0].href };
@@ -54,16 +62,18 @@ const getCategoryGroups = () =>
         .slice(1)
         .map((a) => ({ title: a.innerText, link: a.href })),
     };
-  });
+  })
+);
 
-const getThreads = () =>
+const getThreads = safeQuery(() =>
   toArray(
     document.querySelectorAll("table.boards tbody tr td.featured.w a")
-  ).map((a) => ({ title: a.innerText, link: a.href }));
+  ).map((a) => ({ title: a.innerText, link: a.href }))
+);
 
 const removeBrackets = (str) => str.substring(1, str.length - 1);
 
-const getPagination = () => {
+const getPagination = safeQuery(() => {
   const pagesTd = document.querySelector(
     "table.boards:nth-child(6) tbody tr:last-child td"
   );
@@ -79,4 +89,4 @@ const getPagination = () => {
       link: a.href,
     }))
   );
-};
+});
