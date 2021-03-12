@@ -6,23 +6,48 @@ const Container = (attrs = {}, ...children) =>
   el("div", { class: `th-container ${attrs.class || ''}`, ...attrs },
     ...children)
 
-const Header = () => 
-  el("header", {},
-    Logo(),
-    el("nav", {},
-      el("ul", {},
-        ...["Home", "New", "Recent"].map(li =>
-          el("li", {},
-            t(li)
+const AuthHeader = () => [];
+
+const Header = () => {
+  const navlinks = {
+    home: "/", 
+    new: "/new",
+    recent: "/recent", 
+    trending: "/trending", 
+    login: "/login", 
+    "sign up": "/register"
+  }
+  return el("header", {},
+          Logo(),
+          el("nav", {},
+            el("ul", {},
+              ...Object.keys(navlinks).map(l =>
+                el("li", {},
+                  el("a", { href: navlinks[l], class: `btn ${l == 'login' ? 'primary': ''}` },
+                    t(l)
+                  )
+                )
+              )
+            )
           )
-        )
+  )
+}
+
+const Hero = () => 
+  el("div", { class: "hero" },
+    Logo("h2", "big"),
+    el("form", { action: "/search", class: "search" },
+      el("input", { name: "query", placeholder: "Topic, Thread, Phrase, News, Information..." }),
+      el("button", { type: "submit" },
+        t("Submit")
       )
     )
   )
 
-const Logo = (e = "h1") => {
+const Logo = (e = "h1", classes= '') => {
   const el = document.createElement(e)
   el.classList.add("logo")
+  classes.split(" ").filter(c => c).forEach(c => el.classList.add(c))
   el.innerHTML = "&#8358;airaland Forum";
   return [el];
 }
@@ -95,6 +120,7 @@ const body = document.querySelector("body");
 render(body,
   Container({},
     Header(),
-    ThreadBoard(getThreads(), getCategoryGroups(), getPagination()),
+    Hero(),
+    ThreadBoard(getThreads() || [], getCategoryGroups() || [], getPagination() || {}),
   ),
 );
