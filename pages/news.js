@@ -30,6 +30,6 @@ render(
     {},
     Header(),
     Hero(),
-    ThreadBoard(getThreads(), JSON.parse(localStorage.getItem("categoryGroups")), getPagination())
+    ThreadBoard(getThreads(), JSON.parse(localStorage.getItem("categoryGroups")) || [], getPagination())
   )
 );
