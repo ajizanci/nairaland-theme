@@ -6,7 +6,7 @@
     const contents = body.match(/<div class="body">([\w\W\s]*?)<\/div>/)[1];
     const div = document.createElement("div");
     div.innerHTML = contents;
-    getCategoryGroups(div)
+    getCategoryGroups(div);
   }
 
   renderDefault();
@@ -23,6 +23,7 @@ function renderDefault() {
   );
 
   if (categoryGroup) {
+    categoryGroup.current = "current";
     renderBoard(categoryGroups, categoryGroup.title);
   }
 }
@@ -40,7 +41,7 @@ function renderBoard(categoryGroups, title) {
       {
         page: removeBrackets(p.querySelector("b").innerText),
         link: window.location.href,
-        current: true,
+        current: "current",
       },
     ]
       .concat(
@@ -60,12 +61,7 @@ function renderBoard(categoryGroups, title) {
       {},
       Header(),
       Hero(),
-      ThreadBoard(
-        getThreads(),
-        categoryGroups,
-        getPagination(),
-        title
-      )
+      ThreadBoard(getThreads(), categoryGroups, getPagination(), title)
     )
   );
 }

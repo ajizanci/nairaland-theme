@@ -11,7 +11,7 @@
       {
         page: removeBrackets(p.querySelector("b").innerText),
         link: window.location.href,
-        current: true,
+        current: "current",
       },
     ]
       .concat(

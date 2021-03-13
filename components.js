@@ -78,7 +78,7 @@ const Threads = (threads, pagination, heading) =>
 const Pagination = (pages) => 
   el("div", { class: "pagination" },
     ...pages.map(page =>
-      el("a", { class: "link page" + (page.current ? " current" : ""), href: page.link },
+      el("a", { class: `link page ${page.current}`, href: page.link },
         t(page.page))))
 
 const GoToTop = () => 
@@ -102,7 +102,7 @@ const ThreadCategories = (categoryGroup) =>
       t(categoryGroup.heading.title)
     ),
     ...categoryGroup.categories.map((category) =>
-      el("a", { class: "link category", href: category.link },
+      el("a", { class: `link category ${category.current}`, href: category.link },
         t(category.title)
       )
     )

@@ -225,6 +225,9 @@ aside {
   font-size: 0.95em;
   background-color: var(--light-gray);
 }
+.categories .category.current {
+  border-left: 4px solid var(--primary-color);
+}
 .categories .category:nth-child(2n + 1) {
   background-color: var(--dark-gray);
 }
