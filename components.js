@@ -52,16 +52,16 @@ const Logo = (e = "h1", classes= '') => {
   return [el];
 }
 
-const ThreadBoard = (threads, categoryGroups, pagination) =>
+const ThreadBoard = (threads, categoryGroups, pagination, heading = "Latest News") =>
   el("main", {},
-    Threads(threads, pagination),
+    Threads(threads, pagination, heading),
     CategoryNav(categoryGroups)
   )
 
-const Threads = (threads, pagination) => 
+const Threads = (threads, pagination, heading) => 
   el("section", { class: "threads" },
     el("h2", { class: "heading" },
-      t("Latest News")
+      t(heading)
     ),
     el("div", { class: "posts" },
       ...threads.map(thread =>
@@ -99,10 +99,7 @@ const CategoryNav = (categoryGroups) => el(
 const ThreadCategories = (categoryGroup) =>
   el("div", { class: "categories" },
     el("h2", { class: "heading" },
-      el("a", { class: "link", href: categoryGroup.heading.link },
-        t(categoryGroup.heading.title),
-      )
-      
+      t(categoryGroup.heading.title)
     ),
     ...categoryGroup.categories.map((category) =>
       el("a", { class: "link category", href: category.link },
@@ -115,12 +112,3 @@ const HowToPlaceAds = () =>
   el("a", { href: "#", class: "link how" },
    t("How to PLACE TARGETED ADS on Nairaland") 
   );
-
-const body = document.querySelector("body"); 
-render(body,
-  Container({},
-    Header(),
-    Hero(),
-    ThreadBoard(getThreads() || [], getCategoryGroups() || [], getPagination() || {}),
-  ),
-);

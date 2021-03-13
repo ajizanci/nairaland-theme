@@ -54,7 +54,7 @@ header > nav > ul {
 }
 
 header > nav > ul > * + * {
-  margin-left: 0.5rem;
+  margin-left: 0.3rem;
 }
 
 .btn {
@@ -263,12 +263,13 @@ aside {
 }
 .page.current {
   background-color: var(--secondary-color);
-  width: 1.5em;
-  height: 1.5em;
+  min-width: 1.5em;
+  min-height: 1.5em;
   justify-content: center;
   display: flex;
   align-items: center;
   border-radius: 100%;
+  padding: 0.3em;
   color: var(--primary-color);
 }
 .gototop {

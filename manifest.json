@@ -1,12 +1,17 @@
 {
   "manifest_version": 2,
-  "name": "Cult",
+  "name": "Nairaland Plus",
   "version": "1.0",
-  "description": "Adds notes to highlighted text on pages",
+  "description": "An alternative UI/UX for nairaland.com.",
   "content_scripts": [
     {
-      "matches": ["https://www.nairaland.com/*"],
-      "js": ["main.js", "utils.js", "components.js"],
+      "matches": ["https://www.nairaland.com/?*", "https://www.nairaland.com/"],
+      "js": ["main.js", "utils.js", "components.js", "pages/index.js"],
+      "css": ["styles.css"]
+    },
+    {
+      "matches": ["https://www.nairaland.com/news*"],
+      "js": ["main.js", "utils.js", "components.js", "pages/news.js"],
       "css": ["styles.css"]
     }
   ]
