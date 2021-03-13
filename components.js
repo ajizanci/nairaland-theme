@@ -91,10 +91,10 @@ const Disclaimer = () =>
     t("Every member of Nairaland is solely responsible for what he or she posts on Nairaland.")
   );
 
-const CategoryNav = (categoryGroups) => el(
-  "aside", { class: "category-nav" },
+const CategoryNav = (categoryGroups) =>  
+  el("aside", { class: "category-nav" },
   ...categoryGroups.map((group) => ThreadCategories(group)),
-);
+  );
 
 const ThreadCategories = (categoryGroup) =>
   el("div", { class: "categories" },

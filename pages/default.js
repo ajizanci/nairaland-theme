@@ -6,19 +6,7 @@
     const contents = body.match(/<div class="body">([\w\W\s]*?)<\/div>/)[1];
     const div = document.createElement("div");
     div.innerHTML = contents;
-    const groups = toArray(div.querySelectorAll("table.boards tr td.l")).map(
-      (td) => {
-        const links = toArray(td.querySelectorAll("a"));
-        const heading = { title: links[0].innerText, link: links[0].href };
-        return {
-          heading,
-          categories: links
-            .slice(1)
-            .map((a) => ({ title: a.innerText, link: a.href })),
-        };
-      }
-    );
-    localStorage.setItem("categoryGroups", JSON.stringify(groups));
+    getCategoryGroups(div)
   }
 
   renderDefault();

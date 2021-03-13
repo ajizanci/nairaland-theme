@@ -33,7 +33,7 @@
       Hero(),
       ThreadBoard(
         getThreads(),
-        JSON.parse(localStorage.getItem("categoryGroups")),
+        getCategoryGroups(),
         getPagination()
       )
     )
