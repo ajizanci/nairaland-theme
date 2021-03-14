@@ -1,4 +1,4 @@
-function render(parent, tree) {
+function render(parent = document, tree, prepend = false) {
   let head;
 
   const children = tree[tree.length - 1];
@@ -18,7 +18,7 @@ function render(parent, tree) {
 
   Object.keys(attrs).forEach((key) => head.setAttribute(key, attrs[key]));
 
-  parent.append(head);
+  if (prepend) parent.prepend(head); else parent.append(head);
 }
 
 const isLoggedIn = () =>

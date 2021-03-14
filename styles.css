@@ -286,3 +286,106 @@ aside {
   color: var(--danger);
   text-align: center;
 }
+.thread-meta, .thread {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23f7f7cf' fill-opacity='0.98'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.thread-meta .wrapper {
+  background-color: rgba(23, 86, 22, 0.7);
+  padding: 2.5em 4em;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.thread-meta h1 {
+  text-transform: capitalize;
+  font-size: 26px;
+}
+.thread-meta a.author {
+  color: #fdfda3f0;
+  text-decoration: none;
+}
+.thread-meta button.save {
+  background-color: #fdfda3f0;
+  text-transform: capitalize;
+  padding: 1em;
+  font-size: 0.94rem;
+  border-radius: 0.3em;
+  color: var(--primary-color);
+  border: 0;
+  font-weight: bold;
+  font-family: inherit;
+}
+.thread {
+  padding: 4em;
+  min-height: 100vh;
+}
+.thread > div + div {
+  margin-top: 2em;
+}
+.post-wrapper {
+  background-color: var(--light-gray);
+}
+.post-wrapper div.post {
+  padding: 1.5em 2em;
+}
+.post-wrapper div.post div.meta {
+  margin-bottom: 2em;
+  display: flex;
+  align-items: flex-end;
+}
+div.post blockquote {
+  background-color: var(--dark-gray);
+  padding: 1.5em;
+  margin: 1em -1em;
+}
+div.meta img.author-img {
+  width: 3em;
+  height: 3em;
+  border-radius: 0.3em;
+  object-fit: cover;
+  border: 1px solid var(--primary-color);
+}
+div.meta > div {
+  margin-left: 0.8em;
+  font-size: 0.87rem;
+}
+div.meta a.author {
+  color: inherit;
+  text-transform: capitalize;
+  text-decoration: none;
+  font-weight: bold;
+}
+.post-wrapper .reactions {
+  padding: 1em 2em;
+  background-color: var(--dark-gray);
+}
+.post-wrapper .reactions > * + * {
+  margin-left: 1.5em;
+}
+.post-wrapper .reactions button {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  font-weight: bold;
+  border: 0;
+  background-color: inherit;
+}
+.post-wrapper .reactions button > span {
+  margin-left: 0.8em;
+  font-family: "Roboto";
+}
+.reactions svg.reaction {
+  width: 1.5em;
+  height: 1.5em;
+}
+.reactions .quote svg.reaction {
+  stroke: #6b986a !important;
+}
+.reactions .like svg.reaction {
+  fill: var(--danger) !important;
+}
+.reactions .share svg.reaction {
+  fill: #6b986a !important;
+}
