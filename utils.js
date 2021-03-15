@@ -18,7 +18,8 @@ function render(parent = document, tree, prepend = false) {
 
   Object.keys(attrs).forEach((key) => head.setAttribute(key, attrs[key]));
 
-  if (prepend) parent.prepend(head); else parent.append(head);
+  if (prepend) parent.prepend(head);
+  else parent.append(head);
 }
 
 const isLoggedIn = () =>
@@ -59,18 +60,18 @@ const getCategoryGroups = (container = document) =>
   safeQuery(() => {
     let groups = localStorage.getItem("categoryGroups");
     if (groups) return JSON.parse(groups);
-    groups = toArray(container.querySelectorAll("a[name='top'] + table.boards tr td.l")).map(
-      (td) => {
-        const links = toArray(td.querySelectorAll("a"));
-        const heading = { title: links[0].innerText, link: links[0].href };
-        return {
-          heading,
-          categories: links
-            .slice(1)
-            .map((a) => ({ title: a.innerText, link: a.href })),
-        };
-      }
-    );
+    groups = toArray(
+      container.querySelectorAll("a[name='top'] + table.boards tr td.l")
+    ).map((td) => {
+      const links = toArray(td.querySelectorAll("a"));
+      const heading = { title: links[0].innerText, link: links[0].href };
+      return {
+        heading,
+        categories: links
+          .slice(1)
+          .map((a) => ({ title: a.innerText, link: a.href })),
+      };
+    });
     localStorage.setItem("categoryGroups", JSON.stringify(groups));
     return groups;
   })();

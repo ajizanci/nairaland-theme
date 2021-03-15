@@ -70,76 +70,107 @@ function renderBoard(categoryGroups, title) {
 
 function renderThread() {
   const getPosts = () => {
-    const tds = toArray(document.querySelectorAll("table[summary='posts'] td:not(.pu.pd)"))
+    const tds = toArray(
+      document.querySelectorAll("table[summary='posts'] td:not(.pu.pd)")
+    );
     const groupedTds = [];
 
-    while (tds.length > 0)
-      groupedTds.push(tds.splice(0, 2));
-    
+    while (tds.length > 0) groupedTds.push(tds.splice(0, 2));
+
     return groupedTds.map(([info, main]) => {
-      let replyingTo = safeQuery(() => main.querySelector("div.narrow > blockquote > a"))()
-      replyingTo = replyingTo && new URL(replyingTo.href).pathname.startsWith("/post")
-                    ? replyingTo.innerText : "Nobody"
+      let replyingTo = safeQuery(() =>
+        main.querySelector("div.narrow > blockquote > a")
+      )();
+      replyingTo =
+        replyingTo && new URL(replyingTo.href).pathname.startsWith("/post")
+          ? replyingTo.innerText
+          : "Nobody";
       return {
         replyingTo,
-        author: safeQuery(() => info.querySelector('a.user').innerText)() || "Nobody",
-        timeOfPub: info.querySelector('span.s').innerText,
-        html: main.querySelector('div.narrow').innerHTML,
-        likes: safeQuery(() =>  +main.querySelector('p.s b').innerText.match(/\d+/)[0])() || 0,
-        shares: safeQuery(() => +main.querySelector('p.s b:last-child').innerText.match(/\d+/)[0])() || 0,
-        attachmentImages: toArray(main.querySelectorAll('img.attachmentimage')).map(img => img.src)
-      }
-    })
-  }
+        author:
+          safeQuery(() => info.querySelector("a.user").innerText)() || "Nobody",
+        timeOfPub: info.querySelector("span.s").innerText,
+        html: main.querySelector("div.narrow").innerHTML,
+        likes:
+          safeQuery(
+            () => +main.querySelector("p.s b").innerText.match(/\d+/)[0]
+          )() || 0,
+        shares:
+          safeQuery(
+            () =>
+              +main.querySelector("p.s b:last-child").innerText.match(/\d+/)[0]
+          )() || 0,
+        attachmentImages: toArray(
+          main.querySelectorAll("img.attachmentimage")
+        ).map((img) => img.src),
+      };
+    });
+  };
 
-  render(document.querySelector("body"),
-    Container({},
+  render(
+    document.querySelector("body"),
+    Container(
+      {},
       Header(),
-      el("div", { class: "thread" },
-        ...getPosts().map(post => {
+      el(
+        "div",
+        { class: "thread" },
+        ...getPosts().map((post) => {
           const postDiv = document.createElement("div");
           postDiv.classList.add("post");
           postDiv.innerHTML = post.html;
-          render(postDiv,
-            el("div", { class: "meta" },
-              el("div", {},
-                el("p", {},
-                  el("a", { class: "author", href: `/${post.author}` },
+          render(
+            postDiv,
+            el(
+              "div",
+              { class: "meta" },
+              el(
+                "div",
+                {},
+                el(
+                  "p",
+                  {},
+                  el(
+                    "a",
+                    { class: "author", href: `/${post.author}` },
                     t(post.author)
                   ),
                   t(" commented on "),
-                  el("a", { class: "author", href: `/${post.replyingTo}` },
+                  el(
+                    "a",
+                    { class: "author", href: `/${post.replyingTo}` },
                     t(post.replyingTo)
                   )
                 ),
-                el("p", {},
-                  t(post.timeOfPub)
-                )
+                el("p", {}, t(post.timeOfPub))
               )
-            ), true
-          )
-          return el("div", { class: "post-wrapper" },
+            ),
+            true
+          );
+          return el(
+            "div",
+            { class: "post-wrapper" },
             [postDiv],
-            el("div", { class: "reactions" },
-              el("button", { class: "quote" },
-                QuoteIcon()
-              ),
-              el("button", { class: "like" },
+            el(
+              "div",
+              { class: "reactions" },
+              el("button", { class: "quote" }, QuoteIcon()),
+              el(
+                "button",
+                { class: "like" },
                 HeartIcon(),
-                el("span", {},
-                  t(post.likes)
-                )
+                el("span", {}, t(post.likes))
               ),
-              el("button", { class: "share" },
+              el(
+                "button",
+                { class: "share" },
                 ShareIcon(),
-                el("span", {},
-                  t(post.shares)
-                )
+                el("span", {}, t(post.shares))
               )
             )
-          )
+          );
         })
       )
     )
-  )
+  );
 }
