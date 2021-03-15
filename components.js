@@ -110,6 +110,30 @@ const ThreadBoard = (
 const Thread = (posts) =>
   el("div", { class: "thread" }, ...posts.map((post) => PostWrapper(post)));
 
+const ThreadMeta = (threadMeta) =>
+  el(
+    "div",
+    { class: "thread-meta" },
+    el(
+      "div",
+      { class: "wrapper" },
+      el(
+        "div",
+        { class: "details" },
+        el("h1", {}, t(threadMeta.title)),
+        el(
+          "p",
+          { class: "pub-meta" },
+          t("by "),
+          el("a", { class: "author" }, t(threadMeta.author)),
+          t(": "),
+          el("span", { class: "time" }, t(threadMeta.timeOfPub))
+        )
+      ),
+      el("button", { class: "save" }, t("save thread"))
+    )
+  );
+
 const PostWrapper = (post) =>
   el(
     "div",
