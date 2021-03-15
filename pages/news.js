@@ -1,11 +1,11 @@
 (function () {
-  const getThreads = safeQuery(() =>
+  const threads = safeQuery(() =>
     toArray(
       document.querySelectorAll("table[summary='links'] > tbody > tr > td a")
     ).map((a) => ({ title: a.innerText, link: a.href }))
   );
 
-  const getPagination = safeQuery(() => {
+  const pagination = safeQuery(() => {
     const p = document.querySelector("table[summary='links'] + p");
     return [
       {
@@ -32,9 +32,9 @@
       Header(),
       Hero(),
       ThreadBoard(
-        getThreads(),
+        threads,
         JSON.parse(localStorage.getItem("categoryGroups")),
-        getPagination()
+        pagination
       )
     )
   );

@@ -1,11 +1,11 @@
 (function () {
-  const getThreads = safeQuery(() =>
+  const threads = safeQuery(() =>
     toArray(
       document.querySelectorAll("table.boards tbody tr td.featured.w a")
     ).map((a) => ({ title: a.innerText, link: a.href }))
   );
 
-  const getPagination = safeQuery(() => {
+  const pagination = safeQuery(() => {
     const pagesTd = document.querySelector(
       "table.boards:nth-child(6) tbody tr:last-child td"
     );
@@ -32,9 +32,9 @@
       Header(),
       Hero(),
       ThreadBoard(
-        getThreads(),
+        threads,
         getCategoryGroups(),
-        getPagination()
+        pagination
       )
     )
   );

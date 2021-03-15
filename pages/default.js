@@ -31,13 +31,13 @@ function renderDefault() {
 }
 
 function renderBoard(categoryGroups, title) {
-  const getThreads = safeQuery(() =>
+  const threads = safeQuery(() =>
     toArray(
       document.querySelectorAll("table:not([summary]) tbody tr td > b > a")
     ).map((a) => ({ title: a.innerText, link: a.href }))
   );
 
-  const getPagination = safeQuery(() => {
+  const pagination = safeQuery(() => {
     const p = document.querySelector("table:not([summary]) + p");
     return [
       {
@@ -63,7 +63,7 @@ function renderBoard(categoryGroups, title) {
       {},
       Header(),
       Hero(),
-      ThreadBoard(getThreads(), categoryGroups, getPagination(), title)
+      ThreadBoard(threads, categoryGroups, pagination, title)
     )
   );
 }
@@ -80,7 +80,7 @@ function renderThread() {
     return groupedTds.map(([info, main]) => {
       let replyingTo = safeQuery(() =>
         main.querySelector("div.narrow > blockquote > a")
-      )();
+      );
       replyingTo =
         replyingTo && new URL(replyingTo.href).pathname.startsWith("/post")
           ? replyingTo.innerText
@@ -88,18 +88,18 @@ function renderThread() {
       return {
         replyingTo,
         author:
-          safeQuery(() => info.querySelector("a.user").innerText)() || "Nobody",
+          safeQuery(() => info.querySelector("a.user").innerText) || "Nobody",
         timeOfPub: info.querySelector("span.s").innerText,
         html: main.querySelector("div.narrow").innerHTML,
         likes:
           safeQuery(
             () => +main.querySelector("p.s b").innerText.match(/\d+/)[0]
-          )() || 0,
+          ) || 0,
         shares:
           safeQuery(
             () =>
               +main.querySelector("p.s b:last-child").innerText.match(/\d+/)[0]
-          )() || 0,
+          ) || 0,
         attachmentImages: toArray(
           main.querySelectorAll("img.attachmentimage")
         ).map((img) => img.src),

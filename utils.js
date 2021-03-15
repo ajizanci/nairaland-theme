@@ -48,9 +48,9 @@ const toArray = (collection) => [].slice.call(collection);
 const safeQuery = (f) => {
   try {
     const out = f();
-    return () => out;
+    return out;
   } catch {
-    return () => null;
+    return null;
   }
 };
 
@@ -74,4 +74,4 @@ const getCategoryGroups = (container = document) =>
     });
     localStorage.setItem("categoryGroups", JSON.stringify(groups));
     return groups;
-  })();
+  });
