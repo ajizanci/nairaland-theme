@@ -27,6 +27,9 @@ function renderDefault() {
     renderBoard(categoryGroups, categoryGroup.title);
   } else if (/^\/(\d+)\/.*/.test(url.pathname)) {
     renderThread();
+  } else {
+    document.querySelector(".body").classList.remove("hidden");
+    document.querySelector("head").append(defaultStyles)
   }
 }
 
@@ -112,65 +115,7 @@ function renderThread() {
     Container(
       {},
       Header(),
-      el(
-        "div",
-        { class: "thread" },
-        ...getPosts().map((post) => {
-          const postDiv = document.createElement("div");
-          postDiv.classList.add("post");
-          postDiv.innerHTML = post.html;
-          render(
-            postDiv,
-            el(
-              "div",
-              { class: "meta" },
-              el(
-                "div",
-                {},
-                el(
-                  "p",
-                  {},
-                  el(
-                    "a",
-                    { class: "author", href: `/${post.author}` },
-                    t(post.author)
-                  ),
-                  t(" commented on "),
-                  el(
-                    "a",
-                    { class: "author", href: `/${post.replyingTo}` },
-                    t(post.replyingTo)
-                  )
-                ),
-                el("p", {}, t(post.timeOfPub))
-              )
-            ),
-            true
-          );
-          return el(
-            "div",
-            { class: "post-wrapper" },
-            [postDiv],
-            el(
-              "div",
-              { class: "reactions" },
-              el("button", { class: "quote" }, QuoteIcon()),
-              el(
-                "button",
-                { class: "like" },
-                HeartIcon(),
-                el("span", {}, t(post.likes))
-              ),
-              el(
-                "button",
-                { class: "share" },
-                ShareIcon(),
-                el("span", {}, t(post.shares))
-              )
-            )
-          );
-        })
-      )
+      Thread(getPosts())
     )
   );
 }
