@@ -75,3 +75,24 @@ const getCategoryGroups = (container = document) =>
     localStorage.setItem("categoryGroups", JSON.stringify(groups));
     return groups;
   });
+
+const saveThread = (el, link) => {
+  const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
+  if (!savedThreads.includes(link)) savedThreads.push(link);
+  localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
+  el.textContent = "saved";
+  el.onclick = function (e) {
+    deleteThread(e.target, link);
+  };
+};
+
+const deleteThread = (el, link) => {
+  const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
+  const idx = savedThreads.indexOf(link);
+  if (idx > -1) savedThreads.splice(idx);
+  localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
+  el.textContent = "save thread";
+  el.onclick = function (e) {
+    saveThread(e.target, link);
+  };
+};

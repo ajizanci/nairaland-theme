@@ -85,6 +85,7 @@ function renderThread(id) {
       const threadMeta = safeQuery(() => {
         const td = div.querySelector("table[summary='posts'] td:not(.pu.pd)");
         return {
+          link: `https://www.nairaland.com/${id}`,
           title: td.querySelector("a[href]").innerText,
           author: td.querySelector("a.user").innerText,
           timeOfPub: td.querySelector("span.s").innerText,
@@ -132,7 +133,12 @@ function renderThread(id) {
       });
       render(
         document.querySelector("body"),
-        Container({}, Header(), ThreadMeta(threadMeta), Thread(posts))
+        Container(
+          {},
+          Header(),
+          ThreadMeta(threadMeta),
+          Thread(posts, threadMeta)
+        )
       );
     });
 }

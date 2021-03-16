@@ -107,8 +107,12 @@ const ThreadBoard = (
     CategoryNav(categoryGroups)
   );
 
-const Thread = (posts) =>
-  el("div", { class: "thread" }, ...posts.map((post) => PostWrapper(post)));
+const Thread = (posts, threadMeta) =>
+  el(
+    "div",
+    { class: "thread" },
+    ...posts.map((post) => PostWrapper(post, threadMeta))
+  );
 
 const ThreadMeta = (threadMeta) =>
   el(
@@ -130,15 +134,35 @@ const ThreadMeta = (threadMeta) =>
           el("span", { class: "time" }, t(threadMeta.timeOfPub))
         )
       ),
-      el("button", { class: "save" }, t("save thread"))
+      SaveThreadButton(threadMeta.link)
     )
   );
 
-const PostWrapper = (post) =>
+const SaveThreadButton = (link) => {
+  const isSaved = (
+    JSON.parse(localStorage.getItem("savedThreads")) || []
+  ).includes(link);
+  const el = document.createElement("button");
+  el.classList.add("save");
+  if (isSaved) {
+    el.textContent = "saved";
+    el.onclick = function (e) {
+      deleteThread(e.target, link);
+    };
+  } else {
+    el.textContent = "save thread";
+    el.onclick = function (e) {
+      saveThread(e.target, link);
+    };
+  }
+  return [el];
+};
+
+const PostWrapper = (post, threadMeta) =>
   el(
     "div",
     { class: "post-wrapper" },
-    Post(post),
+    Post(post, threadMeta),
     el(
       "div",
       { class: "reactions" },
@@ -158,34 +182,44 @@ const PostWrapper = (post) =>
     )
   );
 
-const Post = (post) => {
+const Post = (post, threadMeta) => {
   const postDiv = document.createElement("div");
   postDiv.classList.add("post");
   postDiv.innerHTML = post.html;
-  render(
-    postDiv,
-    el(
-      "div",
-      { class: "meta" },
+  if (
+    !(
+      post.author === threadMeta.author &&
+      post.timeOfPub === threadMeta.timeOfPub
+    )
+  )
+    render(
+      postDiv,
       el(
         "div",
-        {},
+        { class: "meta" },
         el(
-          "p",
+          "div",
           {},
-          el("a", { class: "author", href: `/${post.author}` }, t(post.author)),
-          t(" commented on "),
           el(
-            "a",
-            { class: "author", href: `/${post.replyingTo}` },
-            t(post.replyingTo)
-          )
-        ),
-        el("p", {}, t(post.timeOfPub))
-      )
-    ),
-    true
-  );
+            "p",
+            {},
+            el(
+              "a",
+              { class: "author", href: `/${post.author}` },
+              t(post.author)
+            ),
+            t(" commented on "),
+            el(
+              "a",
+              { class: "author", href: `/${post.replyingTo}` },
+              t(post.replyingTo)
+            )
+          ),
+          el("p", {}, t(post.timeOfPub))
+        )
+      ),
+      true
+    );
   return [postDiv];
 };
 

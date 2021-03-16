@@ -317,8 +317,8 @@ aside {
   border-radius: 0.3em;
   color: var(--primary-color);
   border: 0;
-  font-weight: bold;
   font-family: inherit;
+  cursor: pointer;
 }
 .thread {
   padding: 4em;
