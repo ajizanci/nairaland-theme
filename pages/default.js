@@ -13,23 +13,26 @@
 })();
 
 function renderDefault() {
-  const url = new URL(window.location.href);
+  const routes = ["/news"];
+  const path = new URL(window.location.href).pathname;
   const categoryGroups = JSON.parse(localStorage.getItem("categoryGroups"));
   const categoryRoutes = categoryGroups
     .map((g) => g.categories)
     .reduce((a, b) => a.concat(b), []);
   const categoryGroup = categoryRoutes.find((cr) =>
-    url.pathname.startsWith(new URL(cr.link).pathname)
+    path.startsWith(new URL(cr.link).pathname)
   );
 
   if (categoryGroup) {
     categoryGroup.current = "current";
     renderBoard(categoryGroups, categoryGroup.title);
-  } else if (/^\/(\d+)\/.*/.test(url.pathname)) {
-    renderThread(url.pathname.match(/^\/(\d+)\/.*/)[1]);
+  } else if (/^\/(\d+)\/.*/.test(path)) {
+    renderThread(path.match(/^\/(\d+)\/.*/)[1]);
   } else {
-    document.querySelector(".body").classList.remove("hidden");
-    document.querySelector("head").append(defaultStyles);
+    if (path !== "/" && !routes.some((r) => path.startsWith(r))) {
+      document.querySelector(".body").classList.remove("hidden");
+      document.querySelector("head").append(defaultStyles);
+    }
   }
 }
 
