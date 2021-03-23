@@ -76,9 +76,12 @@ const getCategoryGroups = (container = document) =>
     return groups;
   });
 
-const saveThread = (el, link) => {
+const saveThread = (el, threadMeta) => {
   const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
-  if (!savedThreads.includes(link)) savedThreads.push(link);
+  
+  if (!savedThreads.find(({link}) => link === threadMeta.link))
+    savedThreads.push(threadMeta);
+
   localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
   el.textContent = "saved";
   el.onclick = function (e) {
@@ -88,7 +91,7 @@ const saveThread = (el, link) => {
 
 const deleteThread = (el, link) => {
   const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
-  const idx = savedThreads.indexOf(link);
+  const idx = savedThreads.findIndex(t => t.link === link);
   if (idx > -1) savedThreads.splice(idx);
   localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
   el.textContent = "save thread";

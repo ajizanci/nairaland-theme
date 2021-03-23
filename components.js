@@ -134,25 +134,25 @@ const ThreadMeta = (threadMeta) =>
           el("span", { class: "time" }, t(threadMeta.timeOfPub))
         )
       ),
-      SaveThreadButton(threadMeta.link)
+      SaveThreadButton(threadMeta)
     )
   );
 
-const SaveThreadButton = (link) => {
-  const isSaved = (
+const SaveThreadButton = (threadMeta) => {
+  const thread = (
     JSON.parse(localStorage.getItem("savedThreads")) || []
-  ).includes(link);
+  ).find(t => t.link === threadMeta.link);
   const el = document.createElement("button");
   el.classList.add("save");
-  if (isSaved) {
+  if (thread) {
     el.textContent = "saved";
     el.onclick = function (e) {
-      deleteThread(e.target, link);
+      deleteThread(e.target, thread.link);
     };
   } else {
     el.textContent = "save thread";
     el.onclick = function (e) {
-      saveThread(e.target, link);
+      saveThread(e.target, threadMeta);
     };
   }
   return [el];
