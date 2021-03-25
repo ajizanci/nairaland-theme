@@ -8,6 +8,9 @@ We have all learnt to live with [Nairaland's](https://www.nairaland.com) never-c
 ### A Thread
 ![Thread](./thread-page.png)
 
+### Saved Threads
+![Thread](./saved-threads.png)
+
 These are based on [@Ui_uxdesigner's](https://www.twitter.com/Ui_uxdesigner) designs which can be found [here](https://www.behance.net/gallery/93022789/Nairaland-Website-Redesign).
 
 
