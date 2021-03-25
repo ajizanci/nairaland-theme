@@ -6,6 +6,7 @@
   --light-gray: #f2f5f2;
   --dark-gray: #eaecea;
   --danger: #b10707;
+  --font-color: #475e46;
 }
 
 .hidden {
@@ -13,7 +14,7 @@
 }
 
 body {
-  color: var(--primary-color);
+  color: var(--font-color);
 }
 
 * {
@@ -22,15 +23,10 @@ body {
   box-sizing: inherit;
 }
 
-/* .th-container {
-  min-height: 100vh;
-  background-color: white;
-} */
-
 .th-container * {
   font-family: 'Roboto';
   text-align: initial;
-  color: var(--primary-color);
+  color: inherit;
 }
 
 .th-container > * {
@@ -60,6 +56,7 @@ header > nav > ul > * + * {
 .btn {
   display: block;
   text-decoration: none;
+  cursor: pointer;
   text-transform: capitalize;
   padding: 0.8em 1.8em;
 }
@@ -389,4 +386,109 @@ div.meta a.author {
 }
 .reactions .share svg.reaction {
   fill: #6b986a !important;
+}
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  padding-top: 4em;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 2000;
+  font-family: Roboto;
+}
+
+.modal-content {
+  width: 50%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 0.8em;
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: var(--light-gray);
+  padding: 1em;
+}
+
+.modal-header h2 {
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.modal-body .filter {
+  padding: 1.5em 2em;
+}
+
+.modal-body .filter input {
+  display: block;
+  width: 100%;
+  font-size: 0.97rem;
+  font-family: Roboto;
+  border: 2px solid var(--dark-gray);
+  padding: 0.5em;
+  border-radius: 0.3em;
+}
+
+.modal-body .filter input:focus {
+  outline: none;
+  border-color: #86de85;
+}
+
+.saved-threads {
+  max-height: 20em;
+  overflow-y: auto;
+  padding-bottom: 1.5em;
+}
+
+.saved-threads > * + * {
+  border-top: 1px solid var(--dark-gray);
+}
+
+.saved-thread {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1em 2em;
+}
+
+.saved-thread > div > p:first-child {
+  text-transform: capitalize;
+  margin-bottom: 0.4em;
+}
+
+.saved-thread > div > p:first-child a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.saved-thread > div > p:last-child {
+  color: #727d72;
+  font-size: 0.95rem;
+}
+
+.saved-thread a.author {
+  color: inherit;
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.saved-thread button.delete {
+  text-transform: capitalize;
+  padding: 0.5em 1em;
+  font-size: 0.95rem;
+  border-radius: 0.3em;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  font-family: inherit;
+  background: transparent;
+  margin-left: 0.5rem;
+  cursor: pointer;
 }

@@ -30,23 +30,35 @@ const Header = () => {
       el(
         "ul",
         {},
-        ...Object.keys(navlinks).map((l) =>
-          el(
-            "li",
-            {},
+        ...Object.keys(navlinks)
+          .map((l) =>
             el(
-              "a",
-              {
-                href: navlinks[l],
-                class: `btn ${l == "login" ? "primary" : ""}`,
-              },
-              t(l)
+              "li",
+              {},
+              el(
+                "a",
+                {
+                  href: navlinks[l],
+                  class: `btn ${l == "login" ? "primary" : ""}`,
+                },
+                t(l)
+              )
             )
           )
-        )
+          .concat(
+            localStorage.getItem("savedThreads") ? [SavedThreadsLi()] : []
+          )
       )
     )
   );
+};
+
+const SavedThreadsLi = () => {
+  const el = document.createElement("li");
+  el.classList.add("btn");
+  el.textContent = "saved threads";
+  el.onclick = showModal;
+  return [el];
 };
 
 const Hero = () =>
@@ -114,6 +126,36 @@ const Thread = (posts, threadMeta) =>
     ...posts.map((post) => PostWrapper(post, threadMeta))
   );
 
+const SavedThread = (threadMeta) =>
+  el(
+    "div",
+    { class: "saved-thread" },
+    el(
+      "div",
+      {},
+      el("p", {}, el("a", { href: threadMeta.link }, t(threadMeta.title))),
+      el(
+        "p",
+        {},
+        t("by "),
+        el(
+          "a",
+          { class: "author", href: `/${threadMeta.author}` },
+          t(threadMeta.author)
+        ),
+        t(`: ${threadMeta.timeOfPub}`)
+      )
+    ),
+    DeleteThreadButton(threadMeta.link)
+  );
+
+const SavedThreads = (threadsMeta = []) =>
+  el(
+    "div",
+    { class: "saved-threads" },
+    ...threadsMeta.map((tm) => SavedThread(tm))
+  );
+
 const ThreadMeta = (threadMeta) =>
   el(
     "div",
@@ -139,9 +181,9 @@ const ThreadMeta = (threadMeta) =>
   );
 
 const SaveThreadButton = (threadMeta) => {
-  const thread = (
-    JSON.parse(localStorage.getItem("savedThreads")) || []
-  ).find(t => t.link === threadMeta.link);
+  const thread = (JSON.parse(localStorage.getItem("savedThreads")) || []).find(
+    (t) => t.link === threadMeta.link
+  );
   const el = document.createElement("button");
   el.classList.add("save");
   if (thread) {
@@ -155,6 +197,23 @@ const SaveThreadButton = (threadMeta) => {
       saveThread(e.target, threadMeta);
     };
   }
+  return [el];
+};
+
+const DeleteThreadButton = (threadLink) => {
+  const el = document.createElement("button");
+  el.textContent = "delete";
+  el.classList.add("delete");
+
+  el.onclick = function (ev) {
+    const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
+    localStorage.setItem(
+      "savedThreads",
+      JSON.stringify(savedThreads.filter((sv) => sv.link !== threadLink))
+    );
+    ev.target.parentElement.remove();
+  };
+
   return [el];
 };
 
@@ -291,3 +350,39 @@ const HowToPlaceAds = () =>
     { href: "#", class: "link how" },
     t("How to PLACE TARGETED ADS on Nairaland")
   );
+
+const SavedThreadsModalContent = () => {
+  const e = document.createElement("div");
+  e.classList.add("modal-content");
+  e.onclick = (e) => e.stopPropagation();
+  return [
+    render(
+      e,
+      el(
+        "div",
+        {},
+        el("div", { class: "modal-header" }, el("h2", {}, t("saved threads"))),
+        el(
+          "div",
+          { class: "modal-body" },
+          el(
+            "div",
+            { class: "filter" },
+            el("input", { class: "query", placeholder: "Search..." })
+          ),
+          SavedThreads(JSON.parse(localStorage.getItem("savedThreads")) || [])
+        )
+      )
+    ),
+  ];
+};
+
+const SavedThreadsModal = () => {
+  const el = document.createElement("div");
+  el.classList.add("modal-container");
+  el.onclick = function (ev) {
+    console.log(ev.target);
+    ev.target.remove();
+  };
+  return [render(el, SavedThreadsModalContent())];
+};

@@ -20,6 +20,8 @@ function render(parent = document, tree, prepend = false) {
 
   if (prepend) parent.prepend(head);
   else parent.append(head);
+
+  return parent;
 }
 
 const isLoggedIn = () =>
@@ -99,3 +101,8 @@ const deleteThread = (el, link) => {
     saveThread(e.target, link);
   };
 };
+
+const showModal = () => {
+  render(document.querySelector("body"), SavedThreadsModal())
+  console.log("here")
+}
