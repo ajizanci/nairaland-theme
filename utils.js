@@ -104,5 +104,4 @@ const deleteThread = (el, threadMeta) => {
 
 const showModal = () => {
   render(document.querySelector("body"), SavedThreadsModal())
-  console.log("here")
 }
