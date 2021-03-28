@@ -482,13 +482,16 @@ div.meta a.author {
 
 .saved-thread button.delete {
   text-transform: capitalize;
-  padding: 0.5em 1em;
   font-size: 0.95rem;
   border-radius: 0.3em;
   color: var(--danger);
-  border: 1px solid var(--danger);
+  border: 0;
   font-family: inherit;
   background: transparent;
   margin-left: 0.5rem;
   cursor: pointer;
+}
+
+.saved-thread button.delete:hover {
+  text-decoration: underline;
 }

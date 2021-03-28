@@ -87,18 +87,18 @@ const saveThread = (el, threadMeta) => {
   localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
   el.textContent = "saved";
   el.onclick = function (e) {
-    deleteThread(e.target, link);
+    deleteThread(e.target, threadMeta);
   };
 };
 
-const deleteThread = (el, link) => {
+const deleteThread = (el, threadMeta) => {
   const savedThreads = JSON.parse(localStorage.getItem("savedThreads")) || [];
-  const idx = savedThreads.findIndex(t => t.link === link);
+  const idx = savedThreads.findIndex(t => t.link === threadMeta.link);
   if (idx > -1) savedThreads.splice(idx);
   localStorage.setItem("savedThreads", JSON.stringify(savedThreads));
   el.textContent = "save thread";
   el.onclick = function (e) {
-    saveThread(e.target, link);
+    saveThread(e.target, threadMeta);
   };
 };
 

@@ -189,7 +189,7 @@ const SaveThreadButton = (threadMeta) => {
   if (thread) {
     el.textContent = "saved";
     el.onclick = function (e) {
-      deleteThread(e.target, thread.link);
+      deleteThread(e.target, thread);
     };
   } else {
     el.textContent = "save thread";
