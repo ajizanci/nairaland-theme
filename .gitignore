@@ -1,3 +1,7 @@
 run.txt
 out
 todos.md
+npm-debug.log
+node_modules/
+public
+tmp/
