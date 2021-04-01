@@ -384,7 +384,7 @@ class SavedThreadsFilterComponent extends HTMLElement {
     const filterInput = document.createElement("input");
     filterInput.placeholder = "Search..."
     filterInput.addEventListener("input", (ev) =>
-      updateList(threads, ev.target.value, savedThreadsEl)
+      updateList(ev.target.value, savedThreadsEl)
     );
     filter.classList.add("filter");
     filter.appendChild(filterInput);
@@ -415,7 +415,8 @@ class SavedThreadsFilterComponent extends HTMLElement {
   }
 }
 
-function updateList(threads, query, el) {
+function updateList(query, el) {
+  const threads = JSON.parse(localStorage.getItem("savedThreads")) || [];
   el.setAttribute(
     "threads",
     JSON.stringify(
