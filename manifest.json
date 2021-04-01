@@ -6,19 +6,19 @@
   "content_scripts": [
     {
       "matches": ["https://www.nairaland.com/?*", "https://www.nairaland.com/"],
-      "js": ["main.js", "utils.js", "components.js", "pages/index.js"],
+      "js": ["webcomponents-bundle.js","main.js", "utils.js", "components.js", "pages/index.js"],
       "css": ["styles.css"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://www.nairaland.com/news*"],
-      "js": ["main.js", "utils.js", "components.js", "pages/news.js"],
+      "js": ["webcomponents-bundle.js","main.js", "utils.js", "components.js", "pages/news.js"],
       "css": ["styles.css"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://www.nairaland.com/*"],
-      "js": ["main.js", "utils.js", "components.js", "pages/default.js"],
+      "js": ["webcomponents-bundle.js","main.js", "utils.js", "components.js", "pages/default.js"],
       "css": ["styles.css"],
       "run_at": "document_end"
     }
