@@ -20,13 +20,16 @@ These are based on [@Ui_uxdesigner's](https://www.twitter.com/Ui_uxdesigner) des
 2. Visit `chrome://extensions` (or click Menu -> Tools -> Extensions).
 3. Enable Developer mode by ticking the checkbox in the upper-right corner.
 4. Click on the "Load unpacked" button in the top-left corner.
-5. Select the downloaded folder. 
-(stolen from @chidiwilliams)
+5. Select the **public** subdirectory of the downloaded folder. 
 
 ### Firefox Developer Edition
-1. Install `web-ext` with `npm install --global web-ext`
+1. Install `web-ext` with `npm install --global web-ext`.
 2. Clone this repo.
-3. CD into the folder (with your terminal) and run `web-ext run`.
+3. CD into the folder (with your terminal).
+4. Run `npm install` to install the dependencies.
+5. Run `npm run watch`.
+6. CD into the **public** subdirectory.
+7. Run `web-ext run`
 
 
 ## Disclaimer

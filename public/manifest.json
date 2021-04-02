@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Nairaland Plus",
+  "version": "1.0",
+  "description": "An alternative UI for Nairaland",
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.nairaland.com/*", "https://www.nairaland.com/?*"],
+      "css": ["styles.css"],
+      "js": ["js/webcomponents-bundle.js", "js/content_script.js"],
+      "run_at": "document_end"
+    }
+  ]
+
+}
